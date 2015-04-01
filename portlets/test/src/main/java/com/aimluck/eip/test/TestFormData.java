@@ -86,6 +86,10 @@ public class TestFormData extends ALAbstractFormData {
 
   /** メモ */
   private ALStringField note;
+  
+  
+  /** URL **/
+  private ALStringField user_url;
 
 
   /** 現在の年 */
@@ -178,6 +182,12 @@ public class TestFormData extends ALAbstractFormData {
     note = new ALStringField();
     note.setFieldName(ALLocalizationUtils.getl10n("TODO_SETFIELDNAME_MEMO"));
     note.setTrim(false);
+    
+    // URL
+    user_url = new ALStringField();
+    user_url.setFieldName(ALLocalizationUtils.getl10n("TODO_SETFIELDNAME_NOT_SET"));
+    user_url.setTrim(false);
+    
 
   }
 
@@ -193,6 +203,8 @@ public class TestFormData extends ALAbstractFormData {
     test_name.limitMaxLength(50);
     // メモの文字数制限
     note.limitMaxLength(1000);
+    // URLの文字数制限
+    user_url.limitMaxLength(100);
 
     // 担当者ID必須項目
     user_id.setNotNull(true);
@@ -220,6 +232,8 @@ public class TestFormData extends ALAbstractFormData {
     test_name.validate(msgList);
     // メモ
     note.validate(msgList);
+    // URL
+    user_url.validate(msgList);
 
     return (msgList.size() == 0);
 
@@ -247,6 +261,8 @@ public class TestFormData extends ALAbstractFormData {
       test_name.setValue(test.getTestName());
       // メモ
       note.setValue(test.getNote());
+      // URL
+      user_url.setValue(test.getUrl());
 
 
       // 担当者
@@ -328,6 +344,8 @@ public class TestFormData extends ALAbstractFormData {
 
       // メモ
       test.setNote(note.getValue());
+      // URL
+      test.setUrl(user_url.getValue());
       // 作成日
       test.setCreateDate(Calendar.getInstance().getTime());
       // 更新日
@@ -396,6 +414,8 @@ public class TestFormData extends ALAbstractFormData {
       test.setTurbineUser(tuser);
       // メモ
       test.setNote(note.getValue());
+      // URL
+      test.setUrl(user_url.getValue());
       // 更新日
       test.setUpdateDate(Calendar.getInstance().getTime());
       // Test を更新
@@ -442,6 +462,16 @@ public class TestFormData extends ALAbstractFormData {
    */
   public ALStringField getNote() {
     return note;
+  }
+  
+  
+  /**
+   * URLを取得します。 <BR>
+   *
+   * @return
+   */
+  public ALStringField getUrl() {
+    return user_url;
   }
 
 
